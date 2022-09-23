@@ -115,8 +115,12 @@ final class SignUpViewController: UIViewController {
     
     
     func showHome() {
-        let VC = UIViewController()
-        self.navigationController?.pushViewController(VC, animated: true)
+        guard let name = self.lblCName.text else{ return }
+        UserDefaults.standard.set(name, forKey: "name")
+       
+        let storyboard = UIStoryboard(name: "Dashboard", bundle: nil)
+        guard let vc = storyboard.instantiateViewController(withIdentifier: "dashboardView") as? DashboardViewController else { return }
+        self.present(vc, animated: true, completion: nil)
     }
     
     @IBAction func didTapSignIn(_ sender: Any) {
