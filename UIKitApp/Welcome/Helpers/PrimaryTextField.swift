@@ -33,4 +33,30 @@ extension PrimaryTextField {
         layer.borderWidth = 1
         layer.borderColor = CustomColor.border.value.cgColor
     }
+    
+    public func setupErrorStyle() {
+        self.layer.borderColor = UIColor.red.cgColor
+        self.layer.borderWidth = 1
+    }
+    
+    public func correo_valido() -> Bool {
+        let texto = self.text
+        if texto != String()
+        {
+            let emailRegEx = "^[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+            let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+            return emailTest.evaluate(with: texto)
+        }
+        else
+        {
+            return false
+        }
+    }
+    
+    public func campo_vacio() -> Bool {
+        let texto = self.text
+        if texto == String(){   return true }
+        else{   return false    }
+    }
+    
 }

@@ -9,19 +9,19 @@ import UIKit
 
 final class SignUpViewController: UIViewController {
     
-    @IBOutlet weak var lblEMail: UITextField!{
+    @IBOutlet weak var lblEMail: PrimaryTextField!{
         didSet{
             self.lblEMail.delegate = self
         }
     }
     
-    @IBOutlet weak var lblCName: UITextField!{
+    @IBOutlet weak var lblCName: PrimaryTextField!{
         didSet{
             self.lblCName.delegate = self
         }
     }
     
-    @IBOutlet weak var lblSsap: UITextField!{
+    @IBOutlet weak var lblSsap: PrimaryTextField!{
         didSet{
             self.lblSsap.delegate = self
         }
@@ -75,7 +75,48 @@ final class SignUpViewController: UIViewController {
     
     // MARK: - IBActions
     @IBAction func didTapSignUp(_ sender: Any) {
+        if !self.validmail() {
+            self.lblEMail.setupErrorStyle()
+            return
+        } else {
+            self.lblEMail.setupViewStyle()
+        }
+    
+        if !self.validFullName() {
+            self.lblCName.setupErrorStyle()
+            return
+        } else {
+            self.lblCName.setupViewStyle()
+        }
         
+        
+        if !self.validPassword() {
+            self.lblSsap.setupErrorStyle()
+            return
+        } else {
+            self.lblSsap.setupViewStyle()
+        }
+        
+        self.showHome()
+        
+    }
+    
+    private func validmail() -> Bool{
+         return self.lblEMail.campo_vacio() ? false : true
+     }
+     
+     private func validFullName() -> Bool{
+         return  self.lblCName.campo_vacio() ? false : true
+     }
+     
+     private func validPassword() -> Bool{
+         return  self.lblSsap.campo_vacio() ? false : true
+     }
+    
+    
+    func showHome() {
+        let VC = UIViewController()
+        self.navigationController?.pushViewController(VC, animated: true)
     }
     
     @IBAction func didTapSignIn(_ sender: Any) {
