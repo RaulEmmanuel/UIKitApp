@@ -120,6 +120,7 @@ final class SignUpViewController: UIViewController {
        
         let storyboard = UIStoryboard(name: "Dashboard", bundle: nil)
         guard let vc = storyboard.instantiateViewController(withIdentifier: "dashboardView") as? DashboardViewController else { return }
+        vc.modalPresentationStyle = .fullScreen
         self.present(vc, animated: true, completion: nil)
     }
     
